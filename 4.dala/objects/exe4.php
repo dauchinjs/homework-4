@@ -1,44 +1,43 @@
 <?php
 
 class Movie {
-    public string $title;
-    public string $studio;
-    public string $rating;
-    public array $movies;
+    private string $title;
+    private string $studio;
+    private string $rating;
 
-    public function __construct($title, $studio, $rating) {
+    public function __construct(string $title, string $studio, string $rating) {
         $this->title = $title;
         $this->studio = $studio;
         $this->rating = $rating;
     }
 
+    public function getRating():string {
+        return $this->rating;
+    }
+
     public function printMovie(): string {
         return "Movie title '$this->title', the studio '$this->studio', the rating '$this->rating'";
     }
-    function GetPG($movies): array{
-        $moviesWithPG = [];
-        foreach($this->movies as $this->rating) {
-            if($this->rating === "PG") {
-                $moviesWithPG[] = $movies;
+
+    public function GetPG(array $movies) {
+        $filteredMovies = [];
+        foreach($movies as $movie) {
+            if($movie->getRating() === 'PG') {
+                $filteredMovies[] = $movie;
             }
         }
-        return $moviesWithPG;
+        return $filteredMovies;
     }
 }
+
 $movies = [
-$movie1 = new Movie("Casino Royale", "Eon Productions", "PG13"),
+    new Movie("Casino Royale", "Eon Productions", "PG13"),
 
-$movie2 = new Movie("Glass", "Buena Vista International", "PG13"),
+    new Movie("Glass", "Buena Vista International", "PG13"),
 
-$movie3 = new Movie("Spider-Man: Into the Spider-Verse", "Columbia Pictures", "PG"),
+    new Movie("Spider-Man: Into the Spider-Verse", "Columbia Pictures", "PG"),
 ];
 
-echo $movie1->printMovie();
-echo PHP_EOL;
-echo $movie2->printMovie();
-echo PHP_EOL;
-echo $movie3->printMovie();
-echo PHP_EOL;
-
-
-var_dump($movie1->GetPG($movie3));
+$movie = $movies[0];
+$moviesPG = $movie->GetPG($movies);
+var_dump($moviesPG);
